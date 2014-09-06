@@ -7,9 +7,6 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<jetty.version>9.2.2.v20140723</jetty.version>
-	</properties>
 	<artifactId>jetty</artifactId>
 	<dependencies>
 		<dependency>
