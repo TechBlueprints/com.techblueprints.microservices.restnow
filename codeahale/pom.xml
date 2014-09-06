@@ -12,6 +12,13 @@
 			<groupId>com.codahale.metrics</groupId>
 			<artifactId>metrics-jetty9</artifactId>
 			<version>3.0.2</version>
+			<!--  even dependency management isn't forcing this module to use the new jetty. Odd. -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-server</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.codahale.metrics</groupId>
@@ -43,6 +50,10 @@
 			<artifactId>core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -56,6 +67,6 @@
 				<artifactId>jetty-servlet</artifactId>
 				<version>${jetty.version}</version>
 			</dependency>
-		</dependencies>  
+		</dependencies>
 	</dependencyManagement>
 </project>
