@@ -1,4 +1,4 @@
-package com.magicalspirits.microservices.restnow.simple;
+package com.magicalspirits.microservices.restnow.launcher;
 
 import static com.magicalspirits.microservices.restnow.core.ModuleNamedVariables.JETTY_LISTEN_ADDR;
 

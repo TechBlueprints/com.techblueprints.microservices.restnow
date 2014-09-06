@@ -18,19 +18,19 @@ import com.google.common.base.Supplier;
 import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
-import com.magicalspirits.microservices.restnow.simple.Main;
-import com.magicalspirits.microservices.restnow.simple.SimpleModule;
+import com.magicalspirits.microservices.restnow.launcher.Service;
+import com.magicalspirits.microservices.restnow.launcher.SimpleModule;
 
 public class ContainerTests 
 {
-	private Main main;
+	private Service main;
 	private int port;
 
 	@Before
 	public void setup()
 	{
 		System.setProperty(SimpleModule.SYSTEM_PORT_PROPERTY, "0");
-		main = new Main();
+		main = new Service();
 		main.init(new String[]{TestModule.class.getName()});
 		main.start();
 		port = main.getInjector().getInstance(Key.get(new TypeLiteral<Supplier<Integer>>(){}, Names.named(JETTY_PORT_SUPPLIER))).get();

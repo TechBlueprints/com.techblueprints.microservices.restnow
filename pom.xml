@@ -109,6 +109,6 @@
 		<module>core</module>
 		<module>codeahale</module>
 		<module>jackson</module>
-		<module>simple</module>
+		<module>launcher</module>
 	</modules>
 </project>

@@ -19,9 +19,11 @@ import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.magicalspirits.microservices.restnow.codahale.CodahaleModule;
+import com.magicalspirits.microservices.restnow.launcher.Service;
+import com.magicalspirits.microservices.restnow.launcher.SimpleModule;
 
 public class MetricPrefixTest {
-	private Main main;
+	private Service main;
 	private int port;
 
 	@Before
@@ -29,7 +31,7 @@ public class MetricPrefixTest {
 	{
 		System.setProperty(SimpleModule.SYSTEM_PORT_PROPERTY, "0");
 		System.setProperty(CodahaleModule.METRIC_PREFIX, "aprefix");
-		main = new Main();
+		main = new Service();
 		main.init(new String[]{TestModule.class.getName()});
 		main.start();
 		port = main.getInjector().getInstance(Key.get(new TypeLiteral<Supplier<Integer>>(){}, Names.named(JETTY_PORT_SUPPLIER))).get();

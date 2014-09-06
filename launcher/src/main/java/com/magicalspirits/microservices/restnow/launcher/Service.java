@@ -1,4 +1,4 @@
-package com.magicalspirits.microservices.restnow.simple;
+package com.magicalspirits.microservices.restnow.launcher;
 
 import java.util.List;
 
@@ -24,15 +24,15 @@ import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 @Slf4j
-public class Main 
+/**
+ * This is a jsvc capable service. 
+ */
+public class Service 
 {
-	public static void main(String[] args) throws InterruptedException
-	{
-		Main main = new Main();
-		main.init(args);
-		main.start();
-		main.getInjector().getInstance(Server.class).join();
-	}
+	/**
+	 * Defaults to false;
+	 */
+	public static final String SPECIFY_ALL_MODULES = "specify-all-modules";
 	
 	@Getter
 	private CloseableInjector injector;
@@ -41,17 +41,20 @@ public class Main
 	
 	public void init(String[] arguments)
 	{
-		modules.add(new CloseableModule());
-		modules.add(new Jsr250Module());
-		
-		modules.add(new SimpleModule());
-		modules.add(new CodahaleExecutorModule());
-		modules.add(new CodahaleModule());
-		modules.add(new JettyInstrumentedModule());
-		modules.add(new JacksonModule());
-		modules.add(new JettyBasicModule());
-		modules.add(new ResteasyBasicModule());
-		modules.add(new LoggingUncaughtExceptionHandlerModule());
+		if(Strings.isNullOrEmpty(System.getProperty(SPECIFY_ALL_MODULES)) || !Boolean.valueOf(System.getProperty(SPECIFY_ALL_MODULES)))
+		{	
+			modules.add(new CloseableModule());
+			modules.add(new Jsr250Module());
+			
+			modules.add(new SimpleModule());
+			modules.add(new CodahaleExecutorModule());
+			modules.add(new CodahaleModule());
+			modules.add(new JettyInstrumentedModule());
+			modules.add(new JacksonModule());
+			modules.add(new JettyBasicModule());
+			modules.add(new ResteasyBasicModule());
+			modules.add(new LoggingUncaughtExceptionHandlerModule());
+		}
 	
 		for(String arg : arguments)
 		{
