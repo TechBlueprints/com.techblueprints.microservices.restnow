@@ -9,7 +9,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 
-public class SimpleModule extends AbstractModule {
+public class LauncherBasicModule extends AbstractModule {
 
 	public static final String SYSTEM_PORT_PROPERTY = "system-jetty-port";
 	

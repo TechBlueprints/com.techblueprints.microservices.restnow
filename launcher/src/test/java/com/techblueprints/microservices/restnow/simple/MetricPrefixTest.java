@@ -20,7 +20,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.techblueprints.microservices.restnow.codahale.CodahaleModule;
 import com.techblueprints.microservices.restnow.launcher.Service;
-import com.techblueprints.microservices.restnow.launcher.SimpleModule;
+import com.techblueprints.microservices.restnow.launcher.LauncherBasicModule;
 
 public class MetricPrefixTest {
 	private Service main;
@@ -29,7 +29,7 @@ public class MetricPrefixTest {
 	@Before
 	public void setup()
 	{
-		System.setProperty(SimpleModule.SYSTEM_PORT_PROPERTY, "0");
+		System.setProperty(LauncherBasicModule.SYSTEM_PORT_PROPERTY, "0");
 		System.setProperty(CodahaleModule.METRIC_PREFIX, "aprefix");
 		main = new Service();
 		main.init(new String[]{TestModule.class.getName()});

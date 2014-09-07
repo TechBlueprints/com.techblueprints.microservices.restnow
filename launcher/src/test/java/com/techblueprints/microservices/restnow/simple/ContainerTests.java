@@ -19,7 +19,7 @@ import com.google.inject.Key;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 import com.techblueprints.microservices.restnow.launcher.Service;
-import com.techblueprints.microservices.restnow.launcher.SimpleModule;
+import com.techblueprints.microservices.restnow.launcher.LauncherBasicModule;
 
 public class ContainerTests 
 {
@@ -31,7 +31,7 @@ public class ContainerTests
 	{
 		System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
 
-		System.setProperty(SimpleModule.SYSTEM_PORT_PROPERTY, "0");
+		System.setProperty(LauncherBasicModule.SYSTEM_PORT_PROPERTY, "0");
 		main = new Service();
 		main.init(new String[]{TestModule.class.getName()});
 		main.start();

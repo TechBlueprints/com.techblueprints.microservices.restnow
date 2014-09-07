@@ -5,8 +5,6 @@ import java.util.List;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import org.eclipse.jetty.server.Server;
-
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Guice;
@@ -46,7 +44,7 @@ public class Service
 			modules.add(new CloseableModule());
 			modules.add(new Jsr250Module());
 			
-			modules.add(new SimpleModule());
+			modules.add(new LauncherBasicModule());
 			modules.add(new CodahaleExecutorModule());
 			modules.add(new CodahaleModule());
 			modules.add(new JettyInstrumentedModule());
