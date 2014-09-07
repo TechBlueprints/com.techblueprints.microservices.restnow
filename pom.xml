@@ -107,7 +107,7 @@
 		<module>resteasy</module>
 		<module>jetty</module>
 		<module>core</module>
-		<module>codeahale</module>
+		<module>codahale</module>
 		<module>jackson</module>
 		<module>launcher</module>
 	</modules>
