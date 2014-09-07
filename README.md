@@ -17,11 +17,13 @@ Rest shouldn't be difficult, and it shouldn't take any time to implement a rest 
 
 1) Add this dependency to your Maven project:
 
+```
   	<dependency>
   		<groupId>com.techblueprints.microservices.restnow</groupId>
   		<artifactId>launcher</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+```
 
 2) Make a rest service:
 
@@ -29,8 +31,7 @@ Some examples of how to do this, and how to do it asynchronously, can be found i
 Here is a brief example:
 
 ResourceEndpoint.java
----------------------
-
+```
 @Slf4j
 @Path("/resource")
 public class ResourceEndpoint
@@ -46,10 +47,10 @@ public class ResourceEndpoint
 		return new SampleResource(value);
 	}
 }
+```
 
 SampleResource.java
--------------------
-
+```
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -57,9 +58,9 @@ public class SampleResource
 {
 	private String testValue;
 }
-
+```
 3) Bind your jaxrs endpoint in a Guice module:
-
+```
 public class SimpleModule extends AbstractModule
 {
 	@Override
@@ -68,7 +69,7 @@ public class SimpleModule extends AbstractModule
 		bind(ResourceEndpoint.class);
 	}
 }
-
+```
 4) Execute the launcher:
 
 com.techblueprints.microservices.restnow.launcher.Service is an apache jsvc capable launcher, 
