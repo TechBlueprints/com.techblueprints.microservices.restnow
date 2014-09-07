@@ -29,6 +29,8 @@ public class ContainerTests
 	@Before
 	public void setup()
 	{
+		System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "DEBUG");
+
 		System.setProperty(SimpleModule.SYSTEM_PORT_PROPERTY, "0");
 		main = new Service();
 		main.init(new String[]{TestModule.class.getName()});
@@ -47,6 +49,18 @@ public class ContainerTests
 	{
 		Client client = ClientBuilder.newBuilder().register(JacksonJsonProvider.class).build();
 		WebTarget target = client.target("http://localhost:" + port + "/test/resource").queryParam("value", "aTestValue");
+		Response response = target.request().get();
+		TestObject value = response.readEntity(TestObject.class);
+		response.close();
+
+		assertEquals("aTestValue", value.getTestValue());
+	}
+	
+	@Test
+	public void testHappyPathAsync() 
+	{
+		Client client = ClientBuilder.newBuilder().register(JacksonJsonProvider.class).build();
+		WebTarget target = client.target("http://localhost:" + port + "/test/asyncresource").queryParam("value", "aTestValue");
 		Response response = target.request().get();
 		TestObject value = response.readEntity(TestObject.class);
 		response.close();
