@@ -79,17 +79,16 @@ Note: You will need to pass your module name(s) as arguments to the Main launche
 
 5) Enjoy!
 
-Open up a browser to http://localhost:8080/resource/sample?value=test-value and note the result.
+If you have followed the above example, to try your resource, open a browser to http://localhost:8080/resource/sample?value=test-value and note the result.
 
-Also, browse to http://localhost:8080/monitoring and note the metrics and healthchecks available.
+To see the available health checks, and metrics, browse to http://localhost:8080/monitoring
 
-You can add to these by injecting the MetricRegistry or the HealthCheckRegistry and adding to them.
-
+You can add additional metrics and health checks by injecting the MetricRegistry or the HealthCheckRegistry and adding functionality to them.
 
 Additional examples of how create rest endpoints and execute calls asynchronously, can be found in the test scope of the launcher package. 
 
-Additional documentation, sub module documentation, system properties, and Maven Central published artifacts are coming soon.
 
+* Additional documentation, sub module documentation, system properties, and Maven Central published artifacts are coming soon.
 
 
 Apache Software License 2.0:
