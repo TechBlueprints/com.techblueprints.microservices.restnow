@@ -70,12 +70,12 @@ public class SimpleModule extends AbstractModule
 ```
 4) Execute the launcher:
 
-com.techblueprints.microservices.restnow.launcher.Service is an apache jsvc capable launcher, 
-however you probably want to set up a run configuration to run the Main class I have from the test scope:
+com.techblueprints.microservices.restnow.launcher.Service is an apache jsvc capable launcher.
+Unless you are configured to run jsvc, you will want to create a run configuration to run the Main in the test scope:
 
 com.techblueprints.microservices.restnow.launcher.Main SimpleModule
 
-You will need to pass your module name(s) as arguments to the Main launcher and the jsvc launcher.
+Note: You will need to pass your module name(s) as arguments to the Main launcher and the jsvc launcher.
 
 5) Enjoy!
 
