@@ -1,19 +1,18 @@
 com.techblueprints.microservices.restnow
 ========================================
 
-Standing up Rest services should be as simple as 1,2,3
-
+Standing up Rest services should be as simple. This project has been created to make it simple.
 
 RestNow is a container that provides you with a very easy framework for standing up micro (or larger) rest services.
 
 
-This container provides you with a JaxRS 2.0 framework, a Servlet 3.1 container, Guice dependency injection, and metrics and monitoring from codahale.
+This container provides you with a JaxRS 2.0 framework, a Servlet 3.1 container, Guice dependency injection, JSR-250 (@PostConstruct, @PreDestroy), codahale metrics, and codahale health checks for monitoring.
 
 
 Quick Start
 -----------
 
-Rest shouldn't be difficult, and it shouldn't take any time to implement a rest service.
+This quick start should have you a functional rest service in 10 minutes or less.
 
 1) Add this dependency to your Maven project:
 
@@ -27,7 +26,6 @@ Rest shouldn't be difficult, and it shouldn't take any time to implement a rest 
 
 2) Make a rest service:
 
-Some examples of how to do this, and how to do it asynchronously, can be found in the test scope of the launcher package. 
 Here is a brief example:
 
 ResourceEndpoint.java
@@ -88,7 +86,9 @@ Also, browse to http://localhost:8080/monitoring and note the metrics and health
 You can add to these by injecting the MetricRegistry or the HealthCheckRegistry and adding to them.
 
 
-Additional documention including sub module documentation, and maven central published artifacts soon to come.
+Additional examples of how create rest endpoints and execute calls asynchronously, can be found in the test scope of the launcher package. 
+
+Additional documentation, sub module documentation, system properties, and Maven Central published artifacts are coming soon.
 
 
 
