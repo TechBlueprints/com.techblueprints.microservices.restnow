@@ -13,6 +13,7 @@ import com.google.inject.Module;
 import com.mycila.guice.ext.closeable.CloseableInjector;
 import com.mycila.guice.ext.closeable.CloseableModule;
 import com.mycila.guice.ext.jsr250.Jsr250Module;
+import com.techblueprints.microservices.restnow.codahale.CodahaleAnnotationsModule;
 import com.techblueprints.microservices.restnow.codahale.CodahaleExecutorModule;
 import com.techblueprints.microservices.restnow.codahale.CodahaleModule;
 import com.techblueprints.microservices.restnow.codahale.JettyInstrumentedModule;
@@ -47,6 +48,7 @@ public class Service
 			modules.add(new LauncherBasicModule());
 			modules.add(new CodahaleExecutorModule());
 			modules.add(new CodahaleModule());
+			modules.add(new CodahaleAnnotationsModule());
 			modules.add(new JettyInstrumentedModule());
 			modules.add(new JacksonModule());
 			modules.add(new JettyBasicModule());

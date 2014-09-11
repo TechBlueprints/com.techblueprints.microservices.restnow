@@ -16,7 +16,6 @@ import com.codahale.metrics.jvm.FileDescriptorRatioGauge;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
-import com.google.common.base.Strings;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
@@ -25,6 +24,8 @@ import com.google.inject.Singleton;
 public class CodahaleModule extends AbstractModule 
 {
 	public static final String METRIC_PREFIX = "metric-prefix";
+	
+	private static MetricRegistry registry;
 	
 	@Override
 	protected void configure() 
@@ -35,30 +36,36 @@ public class CodahaleModule extends AbstractModule
 	@Singleton
 	public MetricRegistry getMetricRegistry()
 	{
-		String metricPrefix = System.getProperty(METRIC_PREFIX);
-		MetricRegistry mr;
-		if(Strings.isNullOrEmpty(metricPrefix))
-		{
-			mr = new MetricRegistry();
-		}
-		else
-		{
-			mr = new PrefixMetricRegistry(metricPrefix);
-		}
-			
+		return CodahaleModule.getStaticMetricRegistry();
+	}
+	
+	/**
+	 * You shouldn't call this directly. This utility method will dissapear in a future release.
+	 * Presently I need it because the guice-annotations module doesn't expose the registry in a 
+	 * usable way, and the MetricRegistry has to be obtained at construction time, not at injection time.
+	 */
+	synchronized static MetricRegistry getStaticMetricRegistry()
+	{
+		if(registry != null)
+			return registry;
+
+		registry = new MetricRegistry();
+
 		//a bunch of the following code I learned from 
 		// https://github.com/cloudera/cdk/blob/master/cdk-morphlines/cdk-morphlines-metrics-servlets/src/main/java/com/cloudera/cdk/morphline/metrics/servlets/RegisterJVMMetricsBuilder.java
 		BufferPoolMetricSet bpms = new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer());
-		registerAll("jvm.buffers", bpms, mr);
-		registerAll("jvm.gc", new GarbageCollectorMetricSet(), mr);
-		registerAll("jvm.memory", new MemoryUsageGaugeSet(), mr);
-		registerAll("jvm.threads", new ThreadStatesGaugeSet(), mr);
-		register("jvm.fileDescriptorCountRatio", new FileDescriptorRatioGauge(), mr);
-		mr.registerAll(new JvmAttributeGaugeSet());
-		return mr;
+		registerAll("jvm.buffers", bpms, registry);
+		registerAll("jvm.gc", new GarbageCollectorMetricSet(), registry);
+		registerAll("jvm.memory", new MemoryUsageGaugeSet(), registry);
+		registerAll("jvm.threads", new ThreadStatesGaugeSet(), registry);
+		register("jvm.fileDescriptorCountRatio", new FileDescriptorRatioGauge(), registry);
+
+		registry.registerAll(new JvmAttributeGaugeSet());
+
+		return registry;
 	}
 	
-	private void registerAll(String prefix, MetricSet ms, MetricRegistry mr) 
+	private static void registerAll(String prefix, MetricSet ms, MetricRegistry mr) 
 	{
 		for (Map.Entry<String, Metric> entry : ms.getMetrics().entrySet()) 
 		{
@@ -75,7 +82,7 @@ public class CodahaleModule extends AbstractModule
 		} 
 	}
 
-	private void register(String name, Metric m, MetricRegistry mr) 
+	private static void register(String name, Metric m, MetricRegistry mr) 
 	{
 		if (!mr.getMetrics().containsKey(name)) 
 		{ 

@@ -12,7 +12,8 @@
 			<groupId>com.codahale.metrics</groupId>
 			<artifactId>metrics-jetty9</artifactId>
 			<version>3.0.2</version>
-			<!--  even dependency management isn't forcing this module to use the new jetty. Odd. -->
+			<!-- even dependency management isn't forcing this module to use the new 
+				jetty. Odd. -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.eclipse.jetty</groupId>
@@ -53,6 +54,22 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.codahale.metrics</groupId>
+			<artifactId>metrics-annotation</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.palominolabs.metrics</groupId>
+			<artifactId>metrics-guice</artifactId>
+			<version>3.1.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>guice</artifactId>
+					<groupId>com.google.inject</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>

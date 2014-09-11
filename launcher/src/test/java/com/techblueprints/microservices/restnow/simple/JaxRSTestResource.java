@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import lombok.extern.slf4j.Slf4j;
 
+import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
 @Slf4j
